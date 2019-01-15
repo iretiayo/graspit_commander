@@ -335,7 +335,9 @@ class GraspitCommander(object):
                    max_steps=70000,
                    feedback_cb=None,
                    feedback_num_steps=-1,
-                   sim_ann_params=SimAnnParams()):
+                   sim_ann_params=SimAnnParams(),
+                   use_seed_grasp=0,
+                   seed_grasp=None):
         try:
             rospy.init_node(cls.ROS_NODE_NAME, anonymous=True)
         except ROSException:
@@ -351,7 +353,9 @@ class GraspitCommander(object):
                               search_contact=search_contact,
                               max_steps=max_steps,
                               feedback_num_steps=feedback_num_steps,
-                              sim_ann_params=sim_ann_params)
+                              sim_ann_params=sim_ann_params,
+                              use_seed_grasp=use_seed_grasp,
+                              seed_grasp=seed_grasp)
 
         client.send_goal(goal, feedback_cb=feedback_cb)
         client.wait_for_result()
